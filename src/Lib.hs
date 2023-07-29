@@ -1,23 +1,26 @@
 {-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE BlockArguments #-}
 {-# LANGUAGE MultiWayIf #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# OPTIONS_GHC -Wno-type-defaults #-}
 
 module Lib (listdir) where
 
 import Parser (Args(..))
 import Data.List (zipWith4)
+import Data.Map qualified as Map
 import System.FilePath
 import System.Directory
+import Config
 import Colors hiding (color)
 
 color :: String -> String -> IO String
 color path f = do
     dir <- doesDirectoryExist $ path </> f
     if dir then
-        return $ byellow f
+        return $ directory ++ " " ++ byellow f
     else
-        return $ bgreen f
+        return $ Map.findWithDefault file (takeExtension $ path </> f) icons ++ " " ++ bgreen f
 
 rightPad :: Int -> String -> String
 rightPad x xs = xs ++ replicate (x - length xs) ' ' 
@@ -55,9 +58,9 @@ lslist args = do
     --line numbers
     let numbers = pad $ if nums then [show i ++ "." | i <- [1..length files]]
                                 else ["" | _ <- files]
-    --filenames
+    --filenames and icons
     colored <- mapM (color path) files
-    let filenames = map (++ " |") x where 
+    let filenames = map ( ++ " |") x where 
         x = if dots then pad colored 
                     else pad $ filter (\xs -> xs!!5 /= '.') colored
     --file permissions

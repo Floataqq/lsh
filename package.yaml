@@ -25,6 +25,7 @@ dependencies:
 - filepath
 - regex-posix
 - directory
+- containers
 - optparse-applicative >= 0.17
 
 ghc-options:
