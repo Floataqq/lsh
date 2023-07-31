@@ -9,7 +9,7 @@ This may be due to two reasons:
 - Your terminal renders the icons differently. Then, the best you can do is replace the icons to the ones that do render correctly. Use [the nerd font cheat sheet](https://www.nerdfonts.com/cheat-sheet) to choose icons for yourself
 - Your terminal cannot render unicode. On unix the fix is distro-dependant, but on windows you can try:
     - install [Windows Terminal](https://github.com/microsoft/terminal) (also available in Microsoft Store)
-    - changing your codepage with `chcp 65001`
+    - changing your codepage with `chcp 65001` ([guide on how to make this permanent](https://stackoverflow.com/questions/7432545/change-codepage-in-cmd-permanently))
 
 **! Important:**
 **icons *require* a nerd font to be installed within the terminal you are using**
