@@ -22,7 +22,7 @@ directory = byellow "\60035"
 -- if you want an empty icon, use exactly one space
 icons :: Map String String
 icons = fromList [
-    (".bz",    bgreen  "\61894"),
+    (".bz",    cyan    "\61894"),
     (".c",     blue    "\58910"),
     (".cs",    magenta "\983835"),
     (".css",   blue    "\59209"),
@@ -30,7 +30,7 @@ icons = fromList [
     (".dart",  blue    "\58956"),
     (".deb",   bred    "\62214"),
     --("dockerfile", "\62216"),       -- SPOILERS ??
-    (".gz",    bgreen  "\61894"),
+    (".gz",    cyan    "\61894"),
     (".h",     magenta "\58910"),
     (".hi",    magenta "\986258"),
     (".hs",    magenta "\986258"),
@@ -38,15 +38,15 @@ icons = fromList [
     (".jpeg",  bgreen  "\983631"),
     (".jpg",   bgreen  "\983631"),
     (".js",    byellow "\983838"),
-    (".kt",    blue    "\987673"),
+    (".kt",    yellow  "\987673"),
     (".lock",  blue    "\983870"),
     (".lua",   blue    "\58912"),
-    (".mp3",   bgreen  "\983942"),
-    (".mp4",   bgreen  "\61764"),
+    (".mp3",   magenta "\983942"),
+    (".mp4",   bred    "\61764"),
     (".out",   white   "\58898"),
     (".png",   bgreen  "\983631"),
     (".py",    blue    "\58886"),
-    (".rar",   bgreen  "\61894"),
+    (".rar",   cyan    "\61894"),
     --("robots", "\984745"),
     (".toml",  blue    "\61459"),
     (".ts",    blue    "\984806"),
@@ -56,6 +56,6 @@ icons = fromList [
     (".vue",   bgreen  "\985156"),
     (".woff",  red     "\61489"),
     (".voff2", red     "\61489"),
-    (".xz",    bgreen  "\61894"),
-    (".zip",   bgreen  "\61894")
+    (".xz",    cyan    "\61894"),
+    (".zip",   cyan    "\61894")
     ]
