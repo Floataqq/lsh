@@ -5,4 +5,4 @@ import Parser
 import Options.Applicative
 
 main :: IO ()
-main = listdir =<< execParser opts 
+main = listDir =<< execParser opts 

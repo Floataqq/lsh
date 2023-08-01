@@ -1,6 +1,7 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
-module Colors where
+module Colors (black, red, green, yellow, blue, magenta, cyan, white,
+              bblack, bred, bgreen, byellow, bblue, bmagenta, bcyan, bwhite) where
 
 color :: String -> String -> String
 color c s = c ++ s ++ "\ESC[0m"

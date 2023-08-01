@@ -3,8 +3,10 @@
 {-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE ImportQualifiedPost #-}
 {-# OPTIONS_GHC -Wno-type-defaults #-}
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Redundant where" #-}
 
-module Lib (listdir) where
+module Lib (listDir) where
 
 import Parser (Args(..))
 import Data.List (zipWith4)
@@ -12,15 +14,15 @@ import Data.Map qualified as Map
 import System.FilePath
 import System.Directory
 import Config
-import Colors hiding (color)
+import Colors
 
-color :: String -> String -> IO String
-color path f = do
+formatFilename :: String -> String -> IO String
+formatFilename path f = do
     dir <- doesDirectoryExist $ path </> f
     if dir then
-        return $ directory ++ " " ++ byellow f
+        return $ directoryIcon ++ " " ++ byellow f
     else
-        return $ Map.findWithDefault file (takeExtension $ path </> f) icons ++ " " ++ bgreen f
+        return $ Map.findWithDefault fileIcon (takeExtension $ path </> f) iconConfig ++ " " ++ bgreen f
 
 rightPad :: Int -> String -> String
 rightPad x xs = xs ++ replicate (x - length xs) ' ' 
@@ -51,17 +53,17 @@ parsePermissions p =
     xx = if executable p then "x" else "-"
     ss = if searchable p then "s" else "-"
 
-lslist :: Args -> IO ()
-lslist args = do
+lsList :: Args -> IO ()
+lsList args = do
     dc <- getDirectoryContents path
     let files = reverse dc
     --line numbers
     let numbers = pad $ if nums then [show i ++ "." | i <- [1..length files]]
                                 else ["" | _ <- files]
     --filenames and icons
-    colored <- mapM (color path) files
+    colored <- mapM (formatFilename path) files
     let filenames = map ( ++ " |") x where 
-        x = if dots then pad colored 
+        x = if dots then pad colored
                     else pad $ filter (\xs -> xs!!5 /= '.') colored
     --file permissions
     perms <- if perm 
@@ -86,18 +88,18 @@ lslist args = do
                             numbers perms filesizes filenames
     where Args {list=_, size, dots, perm, nums, path, afl=_} = args 
 
-listdir :: Args -> IO ()
-listdir args = do
-    if afl then
-        lslist Args {list=True, size=True, dots=True, perm=True, 
+listDir :: Args -> IO ()
+listDir args = do
+    if afl then                              -- -a flag
+        lsList Args {list=True, size=True, dots=True, perm=True, 
                      nums=True, path, afl=True}
     else if or [list, size, perm, nums] then --stuff that implies -l
-        lslist args
+        lsList args
     else do 
         files <- getDirectoryContents path
-        colored <- mapM (color path) files
+        colored <- mapM (formatFilename path) files
         if dots then
             putStrLn $ unwords $ reverse colored
         else
-            putStrLn $ unwords $ reverse $ filter (\x -> x!!5 /= '.') colored   
+            putStrLn $ unwords $ reverse $ filter (\x -> x!!5 /= '.') colored
     where Args {list, size, dots, perm, nums, path, afl} = args 
