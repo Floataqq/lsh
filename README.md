@@ -15,7 +15,7 @@ This may be due to two reasons:
 **icons *require* a nerd font to be installed within the terminal you are using**
 
 ### How do i disable the icons?
-To disable the icons, you need to write a string of exactly one space in all of the `icons` fields in `Config.hs`, while apllying any of the `Colors.hs` functions to that space
+To disable the icons, you need to write a string of exactly one space in all of the `iconConfig` fields in `Config.hs`, while apllying any of the `Colors.hs` functions to that space
 
 # Configuring
 ### Icons
