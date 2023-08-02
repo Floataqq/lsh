@@ -19,7 +19,7 @@ To disable the icons, you need to write a string of exactly one space in all of 
 
 # Configuring
 ### Icons
-for icons to work, you need to configure three variables in `Config.hs`: `file`, `directory` and `icons`. Icons are represented as one character long unicode strings with a coloring function applied.
- - `file` is the icon to be displayed on extensionless files / file extensions without the icon set
- - `directory` is the icon that will be displyed on directories
- - `icons` is a hashmap (`Extension => Icon`) where the keys are the extensions and the values are the icons. If you want to add another extension, just add another tuple with the extension as the first value (starting with a dot) and the icon as the second one. **You must apply exactly one function from `Colors.hs` to the icon literal, otherwise the fomatting will break. If you want a white icon, use `white` or `bwhite`**
+for icons to work, you need to configure three variables in `Config.hs`: `fileIcon`, `directoryIcon` and `iconConfig`. Icons are represented as one character long unicode strings with a coloring function applied.
+ - `fileIcon` is the icon to be displayed on extensionless files / file extensions without the icon set
+ - `directoryIcon` is the icon that will be displyed on directories
+ - `iconConfig` is a hashmap (`Extension => Icon`) where the keys are the extensions and the values are the icons. If you want to add another extension, just add another tuple with the extension as the first value (starting with a dot) and the icon as the second one. **You must apply exactly one function from `Colors.hs` to the icon literal, otherwise the fomatting will break. If you want a white icon, use `white` or `bwhite`**

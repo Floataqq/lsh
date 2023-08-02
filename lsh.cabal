@@ -38,11 +38,12 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
-    , containers
-    , directory
-    , filepath
-    , optparse-applicative >=0.17
-    , regex-posix
+    , containers >=0.6.5 && <0.7
+    , directory >=1.3.6 && <1.4
+    , filepath >=1.4.2 && <1.5
+    , optparse-applicative >=0.18.1 && <0.19
+    , regex-posix >=0.96.0 && <0.97
+    , time >=1.12.2 && <1.3
   default-language: Haskell2010
 
 executable lsh-exe
@@ -54,12 +55,13 @@ executable lsh-exe
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , containers
-    , directory
-    , filepath
+    , containers >=0.6.5 && <0.7
+    , directory >=1.3.6 && <1.4
+    , filepath >=1.4.2 && <1.5
     , lsh
-    , optparse-applicative >=0.17
-    , regex-posix
+    , optparse-applicative >=0.18.1 && <0.19
+    , regex-posix >=0.96.0 && <0.97
+    , time >=1.12.2 && <1.3
   default-language: Haskell2010
 
 test-suite lsh-test
@@ -72,10 +74,11 @@ test-suite lsh-test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , containers
-    , directory
-    , filepath
+    , containers >=0.6.5 && <0.7
+    , directory >=1.3.6 && <1.4
+    , filepath >=1.4.2 && <1.5
     , lsh
-    , optparse-applicative >=0.17
-    , regex-posix
+    , optparse-applicative >=0.18.1 && <0.19
+    , regex-posix >=0.96.0 && <0.97
+    , time >=1.12.2 && <1.3
   default-language: Haskell2010

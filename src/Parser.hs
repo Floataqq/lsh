@@ -8,6 +8,7 @@ data Args = Args {
     dots :: Bool,     --list dotfiles/hidden files or not
     perm :: Bool,     --drwxs
     nums :: Bool,     --line numbers
+    time :: Bool,
     afl  :: Bool,
     path :: String
 } deriving (Show, Eq)
@@ -19,7 +20,7 @@ args = Args
         help "Wheter to display each file on a new line"
     )
     <*> switch (
-        long "fsize" <> short 's' <>
+        long "filesize" <> short 's' <>
         help "Whether to display file sizes (implies -l)"
     )
     <*> switch (
@@ -35,8 +36,12 @@ args = Args
         help "Whether to display line numbers in listing (implies -l)"
     )
     <*> switch (
+        long "mod-times" <> short 't' <>
+        help "Whether to display last modification times in listing (implies -l)"
+    )   
+    <*> switch (
         long "all" <> short 'a' <>
-        help "Equivalent to -lapsn"
+        help "Equivalent to -lapsnt"
     )
     <*> argument str (
         metavar "DIR" <>
@@ -48,6 +53,5 @@ opts :: ParserInfo Args
 opts = info (args <**> helper) (
             fullDesc <>
             progDesc "List files in a directory" <>
-            header "lsh - a little sample haskell project :)" <>
-            footer "ᓚᘏᗢ"
+            header "lsh - list your files with style"
             )
