@@ -1,18 +1,20 @@
-module Parser(Args(..), args, opts) where
+module Parser(-- * Argument parsers
+              Args(..), args, opts) where
 
 import Options.Applicative
 
-data Args = Args {
-    list :: Bool,
-    size :: Bool,
-    dots :: Bool,     --list dotfiles/hidden files or not
-    perm :: Bool,     --drwxs
-    nums :: Bool,     --line numbers
-    time :: Bool,
-    afl  :: Bool,
-    path :: String
+data Args = Args {    -- ^ Structure for accepting arguments
+    list :: Bool,     -- ^ @\-l@ flag (show files as a table)
+    size :: Bool,     -- ^ @\-s@ flag (show file sizes), implies @-l@
+    dots :: Bool,     -- ^ @\-x@ flag (show dotfiles and directories)
+    perm :: Bool,     -- ^ @\-p@ flag (display file permissions), implies @-l@
+    nums :: Bool,     -- ^ @\-n@ flag (display line numbers), implies @-l@
+    time :: Bool,     -- ^ @\-t@ flag (display last modification time), implies @-l@
+    afl  :: Bool,     -- ^ @\-a@ flag (equivalent to -lapsnt)
+    path :: String    -- ^ path to the directory to list
 } deriving (Show, Eq)
 
+-- | Argument parser using @optparse-applicative@
 args :: Parser Args
 args = Args 
     <$> switch (
@@ -49,6 +51,7 @@ args = Args
         value "."
     )
 
+-- | expanded version to be actually executed by @lsh@ 
 opts :: ParserInfo Args
 opts = info (args <**> helper) (
             fullDesc <>

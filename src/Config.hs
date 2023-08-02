@@ -1,25 +1,27 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Config (fileIcon, directoryIcon, iconConfig) where
+module Config (-- * Icons!
+               fileIcon,
+               directoryIcon, 
+               iconConfig) where
 
-import Data.Map
+import Data.Map ( fromList, Map )
 import Colors
 
--- you must color them somehow, otherwise the formatting
--- won't work (use white in case)
--- default when extension is not found
+-- | Icon to be displayed when the file has no extension or the extension 
+--   is not in the hashmap
 fileIcon :: String
 fileIcon = bgreen "\983578"
 
--- when the object is a directory
+-- | Icon to be displayed when the object is a directory
 directoryIcon :: String
 directoryIcon = byellow "\60035"
 
-
--- there must be a colors function for every icon in the tuples, 
--- otherwise formatting will not work correctly
--- use white and bwhite in case
--- if you want an empty icon, use exactly one space
+-- | Config hashmap for icons for file extensions
+--   There must be a colors function for every icon in the tuples, 
+--   otherwise formatting will not work correctly.
+--   Use white and bwhite in case if you want white icons.
+--   If you want an empty icon, use exactly one space.
 iconConfig :: Map String String
 iconConfig = fromList [
     (".bz",            cyan    "\61894"),

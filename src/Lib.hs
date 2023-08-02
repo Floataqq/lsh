@@ -6,7 +6,9 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 {-# HLINT ignore "Redundant where" #-}
 
-module Lib (listDir) where
+module Lib (-- | This is a binary package, and @Lib@ is the heart of it, so 
+            --   there are no library functions in this module.
+            listDir) where
 
 import Parser (Args(..))
 import Data.List (zipWith5)
@@ -115,6 +117,7 @@ lsList args = do
                             numbers perms filesizes filenames modtimes
     where Args {list=_, size, dots, perm, nums, time, path, afl=_} = args
 
+-- | Entry point, @lslist@ is called when @-l@ is enabled or implied
 listDir :: Args -> IO ()
 listDir args = do
     if afl then                              -- -a flag
