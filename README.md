@@ -1,8 +1,25 @@
 # lsh
  A simple ls clone with modern, colored fomatting. Made in haskell.
  If you want me to add a feature, please add a feature request. Same goes for bug reports/other issues
+ - [Installation]()
  - [Configuring]()
  - [FAQ]()
+# Installation
+ Right now, you can either build from source:
+ ```bash
+    git clone https://github.com/Floataqq/lsh.git
+    stack build
+    stack build --copy-bins
+    stack install --local-bin-path <where you want to install hte binary>
+ ```
+ or install via stack or cabal:
+ ```bash
+ stack install lsh
+ cabal install lsh
+ ```
+ now, you can use `lsh-exe` to list the files
+
+ *The binary name is my accidential mistake and will be changed to `lsh` in a future hackage release*
 # FAQ
  ### Icons do not display correclty
 This may be due to two reasons:
