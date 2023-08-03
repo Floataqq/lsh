@@ -10,7 +10,7 @@
     git clone https://github.com/Floataqq/lsh.git
     stack build
     stack build --copy-bins
-    stack install --local-bin-path <where you want to install hte binary>
+    stack install
  ```
  or install via stack or cabal:
  ```bash
