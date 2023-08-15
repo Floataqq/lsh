@@ -27,6 +27,7 @@ dependencies:
 - containers >= 0.6.5 && < 0.7
 - optparse-applicative >= 0.18.1 && < 0.19
 - time
+- QuickCheck
 
 ghc-options:
 - -Wall

@@ -8,6 +8,8 @@
 
 module Lib (-- | This is a binary package, and @Lib@ is the heart of it, so 
             --   there are no library functions in this module.
+            listf,
+            lsList,
             listDir) where
 
 import Parser (Args(..))
@@ -75,7 +77,7 @@ parseTime :: UTCTime -> String
 parseTime t = bcyan x ++ " " ++ byellow y ++ bred " UTC" where
     (x:y:_) = splitAtChar ' ' (head (splitAtChar '.' $ show t))
 
-lsList :: Args -> IO ()
+lsList :: Args -> IO String
 lsList args = do
     dc <- getDirectoryContents path
     let files = reverse dc
@@ -113,23 +115,31 @@ lsList args = do
         else do
             return ["" | _ <- files]
 
-    putStrLn $ unlines $ zipWith5 (\n p s f t -> n ++ " | " ++ p ++ s ++ f ++ t)
+    return $ unlines $ zipWith5 (\n p s f t -> n ++ " | " ++ p ++ s ++ f ++ t)
                             numbers perms filesizes filenames modtimes
     where Args {list=_, size, dots, perm, nums, time, path, afl=_} = args
 
--- | Entry point, @lslist@ is called when @-l@ is enabled or implied
-listDir :: Args -> IO ()
+listDir :: Args -> IO String
 listDir args = do
-    if afl then                              -- -a flag
-        lsList Args {list=True, size=True, dots=True, perm=True,
+    files <- getDirectoryContents path
+    colored <- mapM (formatFilename path) files
+    if dots then
+        return $ unwords $ reverse colored
+    else
+        return $ unwords $ reverse $ filter (\x -> x!!5 /= '.') colored
+    where Args {list, size, dots, perm, nums, time, path, afl} = args
+
+-- | Entry point, @lslist@ is called when @-l@ is enabled or implied
+listf :: Args -> IO ()
+listf args = do
+    if afl then do                                    -- -a flag
+        l <- lsList Args {list=True, size=True, dots=True, perm=True,
                      nums=True, time=True, path, afl=True}
-    else if or [list, size, perm, nums, time] then --stuff that implies -l
-        lsList args
+        putStrLn l
+    else if or [list, size, perm, nums, time] then do --stuff that implies -l
+        l <- lsList args
+        putStrLn l
     else do
-        files <- getDirectoryContents path
-        colored <- mapM (formatFilename path) files
-        if dots then
-            putStrLn $ unwords $ reverse colored
-        else
-            putStrLn $ unwords $ reverse $ filter (\x -> x!!5 /= '.') colored
+        l <- listDir args
+        putStrLn l
     where Args {list, size, dots, perm, nums, time, path, afl} = args
