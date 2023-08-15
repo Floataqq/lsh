@@ -44,7 +44,7 @@ library:
   source-dirs: src
 
 executables:
-  lsh-exe:
+  lsh:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
